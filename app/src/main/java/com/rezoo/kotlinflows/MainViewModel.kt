@@ -3,6 +3,8 @@ package com.rezoo.kotlinflows
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flow
 
 class MainViewModel:ViewModel() {
@@ -16,6 +18,12 @@ class MainViewModel:ViewModel() {
             emit(currentValue)
 
         }
+    }
+
+    private val _stateFlow= MutableStateFlow(0)
+    val stateFlow = _stateFlow.asStateFlow()
+    fun incrementCounter(){
+        _stateFlow.value+=1
     }
 
 }

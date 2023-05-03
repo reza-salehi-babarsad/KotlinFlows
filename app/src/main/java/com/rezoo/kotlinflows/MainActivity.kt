@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -25,6 +26,7 @@ class MainActivity : ComponentActivity() {
             KotlinFlowsTheme {
                 val viewModel = viewModel<MainViewModel>()
                 val time = viewModel.countDownFlow.collectAsState(initial = 10)
+                val count= viewModel.stateFlow.collectAsState(initial = 0)
 
                 Box(
                     modifier = Modifier.fillMaxSize()) {
@@ -33,6 +35,17 @@ class MainActivity : ComponentActivity() {
                         fontSize = 34.sp,
                         modifier = Modifier.align(Alignment.Center)
                     )
+                    
+                    Button(
+                        onClick = { viewModel.incrementCounter() },
+                        modifier = Modifier.align(Alignment.TopCenter)
+
+                    ) {
+                        Text(
+                            text = "Conter is :${count.value}"
+                        )
+
+                    }
 
                 }
             }
